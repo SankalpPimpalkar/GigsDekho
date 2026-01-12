@@ -1,13 +1,8 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "A url shortener service to shorten the longUrls with analytics",
-  "keywords": [
-    "system-design",
-    "scalability",
-    "caching",
-    "analytics"
-  ],
+  "description": "A freelance platform where you can connect with clients.",
+  "keywords": [],
   "license": "ISC",
   "author": "Sankalp Pimpalkar",
   "type": "module",
