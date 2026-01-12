@@ -17,7 +17,7 @@ export default function Navbar() {
 
                 <div className="navbar-start">
                     <Link to="/" className="text-xl font-extrabold">
-                        GigsDekho
+                        GigFlow
                     </Link>
                 </div>
 

@@ -1,6 +1,6 @@
-<h1>GigsDekho 🚀</h1>
+<h1>GigFlow 🚀</h1>
 
-<p><strong>GigsDekho</strong> is a full-stack freelancing platform where users can browse gigs, apply with proposals, and track their applications. Freelancers can apply to gigs, view their hired gigs, and see stats. Gig owners can post new gigs, review proposals, and hire freelancers. The application uses a React frontend (Vite) and Node.js + Express backend with MongoDB.</p>
+<p><strong>GigFlow</strong> is a full-stack freelancing platform where users can browse gigs, apply with proposals, and track their applications. Freelancers can apply to gigs, view their hired gigs, and see stats. Gig owners can post new gigs, review proposals, and hire freelancers. The application uses a React frontend (Vite) and Node.js + Express backend with MongoDB.</p>
 
 <h2>Features</h2>
 <ul>
@@ -18,8 +18,8 @@
 <h2>Project Setup</h2>
 
 <h3>1. Clone the Repository</h3>
-<pre><code>git clone https://github.com/SankalpPimpalkar/GigsDekho.git
-cd GigsDekho</code></pre>
+<pre><code>git clone https://github.com/SankalpPimpalkar/GigFlow.git
+cd GigFlow</code></pre>
 
 <h3>2. Configure Environment Variables</h3>
 <p>Rename <code>.env.sample</code> to <code>.env</code> in both <strong>backend</strong> and <strong>client</strong> folders.</p>
