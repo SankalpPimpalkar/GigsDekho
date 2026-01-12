@@ -1,0 +1,31 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "A url shortener service to shorten the longUrls with analytics",
+  "keywords": [
+    "system-design",
+    "scalability",
+    "caching",
+    "analytics"
+  ],
+  "license": "ISC",
+  "author": "Sankalp Pimpalkar",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "dev": "node --watch src/main.js",
+    "seed:gig": "node src/seed/gig.seed.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.0.2",
+    "nanoid": "^5.1.6",
+    "redis": "^5.10.0"
+  }
+}
