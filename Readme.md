@@ -38,10 +38,10 @@ CLIENT_URL="http://localhost:5173"</code></pre>
 
 
 <h3>3. Install Dependencies & Build</h3>
-<pre><code>npm install
-cd client
-npm install
-npm run build</code></pre>
+<pre><code>
+npm run build
+npm run start
+</code></pre>
 
 <h3>4. Running the Project</h3>
 
