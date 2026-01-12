@@ -3,11 +3,16 @@ import React, { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { formatDate } from "../ui/GigCard";
 import { bidsAPI } from "../../api/axios";
+import { useAuth } from "../../context/AuthContextProvider";
 
 export default function GigDetailsModal({ gigId = "", gig }) {
     const [message, setMessage] = useState("");
     const [amount, setAmount] = useState("");
     const [formError, setFormError] = useState("");
+
+    const { user } = useAuth();
+    const isOwner = user?.userId === gig?.owner?._id;
+    console.log(user, gig?.owner?._id)
 
     const queryClient = useQueryClient();
 
@@ -53,10 +58,9 @@ export default function GigDetailsModal({ gigId = "", gig }) {
         <dialog id={gigId} className="modal modal-bottom sm:modal-middle">
             <div className="modal-box w-full max-w-3xl space-y-5">
 
+                {/* Gig Info */}
                 <section className="space-y-1">
-                    <h3 className="text-xl font-extrabold">
-                        {gig?.title}
-                    </h3>
+                    <h3 className="text-xl font-extrabold">{gig?.title}</h3>
                     <p className="flex items-center gap-2 text-sm text-secondary">
                         <User className="w-4 h-4" />
                         Posted by {gig?.owner?.name || "Unknown"}
@@ -83,42 +87,44 @@ export default function GigDetailsModal({ gigId = "", gig }) {
 
                 <div className="divider my-1" />
 
-                <section className="space-y-3">
-                    <h5 className="font-bold text-sm">Send Proposal</h5>
+                {/* Only show proposal inputs if not owner */}
+                {!isOwner && (
+                    <section className="space-y-3">
+                        <h5 className="font-bold text-sm">Send Proposal</h5>
 
-                    <textarea
-                        className="textarea textarea-bordered w-full text-sm"
-                        rows={4}
-                        placeholder="Write a short message explaining why you're a good fit..."
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        disabled={isPending}
-                    />
+                        <textarea
+                            className="textarea textarea-bordered w-full text-sm"
+                            rows={4}
+                            placeholder="Write a short message explaining why you're a good fit..."
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            disabled={isPending}
+                        />
 
-                    <input
-                        type="number"
-                        className="input input-bordered w-full text-sm"
-                        placeholder="Your proposed budget ($)"
-                        min={0}
-                        value={amount}
-                        onChange={(e) => setAmount(e.target.value)}
-                        disabled={isPending}
-                    />
+                        <input
+                            type="number"
+                            className="input input-bordered w-full text-sm"
+                            placeholder="Your proposed budget ($)"
+                            min={0}
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
+                            disabled={isPending}
+                        />
 
-                    {formError && (
-                        <p className="text-error text-sm">{formError}</p>
-                    )}
+                        {formError && (
+                            <p className="text-error text-sm">{formError}</p>
+                        )}
+                    </section>
+                )}
 
-                    <div className="flex justify-end gap-2 pt-2">
-                        <form method="dialog">
-                            <button
-                                className="btn btn-ghost btn-sm"
-                                disabled={isPending}
-                            >
-                                Cancel
-                            </button>
-                        </form>
+                {/* Cancel / Close button is always visible */}
+                <div className="flex justify-end gap-2 pt-2">
+                    <form method="dialog">
+                        <button className="btn btn-ghost btn-sm">Cancel</button>
+                    </form>
 
+                    {/* Show send button only if not owner */}
+                    {!isOwner && (
                         <button
                             className="btn btn-primary btn-sm"
                             onClick={handleSubmit}
@@ -126,9 +132,12 @@ export default function GigDetailsModal({ gigId = "", gig }) {
                         >
                             {isPending ? "Sending..." : "Send Proposal"}
                         </button>
-                    </div>
-                </section>
+                    )}
+                </div>
             </div>
+            <form method="dialog" className="modal-backdrop">
+                <button>close</button>
+            </form>
         </dialog>
     );
 }

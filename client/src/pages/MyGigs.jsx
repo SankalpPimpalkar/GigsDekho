@@ -10,7 +10,6 @@ export default function MyGigs() {
     const [searchQuery, setSearchQuery] = useState("");
     const queryClient = useQueryClient();
 
-    /* Fetch my gigs */
     const {
         data: myGigsData,
         isLoading: gigsLoading,
@@ -22,7 +21,6 @@ export default function MyGigs() {
 
     const myGigs = myGigsData?.gigs || [];
 
-    // Filter gigs locally based on searchQuery
     const filteredGigs = useMemo(() => {
         if (!searchQuery.trim()) return myGigs;
         const query = searchQuery.toLowerCase();
@@ -33,7 +31,6 @@ export default function MyGigs() {
         );
     }, [searchQuery, myGigs]);
 
-    /* Fetch bids for selected gig */
     const {
         data: bidsData,
         isLoading: bidsLoading,
@@ -50,11 +47,10 @@ export default function MyGigs() {
         mutationFn: ({ gigId, freelancerId }) => gigsAPI.hire({ gigId, freelancerId }),
         onSuccess: () => {
             queryClient.invalidateQueries(["my-gigs"]);
-            queryClient.invalidateQueries(["gig-bids", selectedGig?._id]);
+            queryClient.invalidateQueries(["gig-bids"]);
         },
     });
 
-    /* Filter bids based on gig status */
     const visibleBids =
         selectedGig?.status === "assigned"
             ? bids.filter((bid) => bid.status === "hired")
@@ -63,7 +59,6 @@ export default function MyGigs() {
     return (
         <div className="grid grid-cols-6 gap-4">
 
-            {/* LEFT: My Gigs */}
             <section className="col-span-6 md:col-span-3 space-y-2">
                 <h3 className="text-xl font-extrabold">My Gigs</h3>
 
@@ -122,7 +117,6 @@ export default function MyGigs() {
                 ))}
             </section>
 
-            {/* RIGHT: Bids */}
             <section className="col-span-6 md:col-span-3 hidden md:flex flex-col gap-3 p-3">
 
                 {!selectedGig && (

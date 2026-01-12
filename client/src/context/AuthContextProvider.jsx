@@ -3,7 +3,13 @@ import { useLocation, useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { authAPI } from "../api/axios";
 
-const AuthContext = createContext(null);
+const AuthContext = createContext({
+    user: null,
+    isAuthenticated: false,
+    isLoading: false,
+    isError: false,
+    refetchUser: () => { },
+});
 
 export default function AuthContextProvider({ children }) {
     const navigate = useNavigate();
@@ -40,7 +46,7 @@ export default function AuthContextProvider({ children }) {
     return (
         <AuthContext.Provider
             value={{
-                user,
+                user: user?.user,
                 isAuthenticated,
                 isLoading,
                 isError,
